@@ -2,13 +2,12 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
 
-import test_rules
+from tests import test_rules
 
-def get_sample_distributor_sheet() -> Worksheet:
-    source_workbook = load_workbook(
-        "/Users/stanleykurniawan/Downloads/BSD MEI 2022.xlsx"
-    )
-    wanted_sheet_name = "BSD MEI 2022"
+
+def _get_sheet_copy(path: str, sheet_name: str) -> Worksheet:
+    source_workbook = load_workbook(path, data_only=True)
+    wanted_sheet_name = sheet_name
     source_sheet = source_workbook[wanted_sheet_name]
 
     copy_workbook = Workbook()
@@ -22,3 +21,21 @@ def get_sample_distributor_sheet() -> Worksheet:
             copy_sheet[col + str(row)] = source_cell_content
 
     return copy_sheet
+
+
+def get_sample_distributor_description_as_id_sheet() -> Worksheet:
+    return _get_sheet_copy(
+        "/Users/stanleykurniawan/Downloads/BSD MEI 2022.xlsx", "BSD MEI 2022"
+    )
+
+
+def get_sample_distributor_code_as_id_sheet() -> Worksheet:
+    return _get_sheet_copy(
+        "/Users/stanleykurniawan/Downloads/saputra alsut mei 2022.xlsx", "Sheet1"
+    )
+
+
+def get_sample_master_sheet() -> Worksheet:
+    return _get_sheet_copy(
+        "/Users/stanleykurniawan/Downloads/MASTER NY JANUARI 2022.xlsx", "Upload"
+    )
