@@ -18,12 +18,14 @@ class NoValueError(Exception):
 class UnacceptableMergedCellError(Exception):
     pass
 
+
 def is_merged_cell(sheet: Worksheet, cell_id: str) -> bool:
     cell: Cell = sheet[cell_id]
     for mergedCell in sheet.merged_cells.ranges:
-        if (cell.coordinate in mergedCell):
+        if cell.coordinate in mergedCell:
             return True
     return False
+
 
 # REQUIRES: each of the value cells must not be merged
 class ValueColumn:
@@ -105,7 +107,7 @@ class _CellIdManipulator:
 
     def get_below(self, down_steps: int) -> str:
         return self.get_column() + str(self.get_row() + down_steps)
-    
+
 
 class _MergedCellHelper:
     # REQUIRES: cell_id must be a vertically merged cell
@@ -117,7 +119,6 @@ class _MergedCellHelper:
             raise UnacceptableMergedCellError(
                 f"cell_id {cell_id} of sheet {sheet} is not a merged cell"
             )
-        
 
     def get_bottom(self) -> str:
         unmerged_search = self.cell_id
@@ -150,9 +151,7 @@ class Helper:
                     if not is_merged_cell(self.sheet, current_cell_id):
                         print(f"I think {current_cell_id} is not a merged cell")
                         return current_cell_id
-                    return _MergedCellHelper(
-                        self.sheet, current_cell_id
-                    ).get_bottom()
+                    return _MergedCellHelper(self.sheet, current_cell_id).get_bottom()
 
         raise NotFoundError(
             f"couldn't find cell with the cell content of {cell_content} "
@@ -192,8 +191,8 @@ class Helper:
         def _get_current_base_cell(self) -> str:
             if not self.last_non_empty_cell:
                 return _CellIdManipulator(self.label_cell_id).get_below(
-                self.empty_cells_streak
-            )
+                    self.empty_cells_streak
+                )
             return _CellIdManipulator(self.last_non_empty_cell).get_below(
                 self.empty_cells_streak
             )

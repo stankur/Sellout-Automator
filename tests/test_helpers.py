@@ -2,16 +2,19 @@ import pytest
 import workbooks_sample
 import models.helpers as helpers
 
+
 def test_is_merged_cell():
     master_sheet = workbooks_sample.get_sample_master_sheet()
     assert helpers.is_merged_cell(master_sheet, "A8")
     assert helpers.is_merged_cell(master_sheet, "A9")
     assert not helpers.is_merged_cell(master_sheet, "A10")
 
+
 # Helper test
 def test_find():
     master_sheet = workbooks_sample.get_sample_master_sheet()
     assert helpers.Helper(master_sheet).find("ID") == "A9"
+
 
 def test_get_column():
     master_sheet = workbooks_sample.get_sample_master_sheet()
@@ -52,6 +55,7 @@ def test_get_row_of():
     assert id_value_column.get_row_of("SLSR00103") == 10
     assert id_value_column.get_row_of("STBR00102") == 513
     assert id_value_column.get_row_of("STBR00021") == 531
+
 
 def test_get_value_at():
     master_sheet = workbooks_sample.get_sample_master_sheet()
