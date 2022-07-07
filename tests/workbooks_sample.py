@@ -2,25 +2,11 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils import get_column_letter
 
-from tests import test_rules
-
-
 def _get_sheet_copy(path: str, sheet_name: str) -> Worksheet:
     source_workbook = load_workbook(path, data_only=True)
-    wanted_sheet_name = sheet_name
-    source_sheet = source_workbook[wanted_sheet_name]
+    source_workbook.save("workbook_copy.xlsx")
 
-    copy_workbook = Workbook()
-    copy_sheet = copy_workbook.active
-
-    for column in range(1, test_rules.EXAMPLES_MAX_COLUMNS + 1):
-        col = get_column_letter(column)
-
-        for row in range(1, test_rules.EXAMPLES_MAX_ROWS + 1):
-            source_cell_content = source_sheet[col + str(row)].value
-            copy_sheet[col + str(row)] = source_cell_content
-
-    return copy_sheet
+    return load_workbook("workbook_copy.xlsx")[sheet_name]
 
 
 def get_sample_distributor_description_as_id_sheet() -> Worksheet:

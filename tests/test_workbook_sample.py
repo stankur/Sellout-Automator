@@ -22,5 +22,7 @@ def test_get_sample_master_sheet():
     assert test_sheet["A1"].value == "Form Upload Sell Out"
     assert test_sheet["B1"].value == None
     assert test_sheet["A6"].value == None
+    assert test_sheet["A8"].value == "ID"
+    assert test_sheet["A9"].value == None
     assert test_sheet["P8"].value == "3S"
     assert test_sheet["A85"].value == "SPSR00107"
