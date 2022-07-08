@@ -35,7 +35,7 @@ def choose_destination_file():
     destination_file_path = filedialog.askopenfilename()
     destination_file.config(text = destination_file_path)
 
-choose_source_file_button = Button(text="Choose Destination", command = choose_destination_file)
+choose_destination_file_button = Button(text="Choose Destination", command = choose_destination_file)
 
 destination_sheet_label = Entry()
 destination_sheet_label.insert(0, "Source File Sheet Label")
@@ -53,7 +53,7 @@ source_id_label.pack()
 source_data_label.pack()
 
 destination_file.pack()
-choose_source_file_button.pack()
+choose_destination_file_button.pack()
 destination_sheet_label.pack()
 destination_id_label.pack()
 destination_data_label.pack()
