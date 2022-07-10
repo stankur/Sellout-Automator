@@ -21,12 +21,14 @@ class EntryGroup:
         self.label.pack()
         self.entry.pack()
 
-    def destroy(self) -> None:
-        self.label.destroy()
-        self.entry.destroy()
+    def empty(self) -> None:
+        self.entry.delete(0, END)
 
     def disable(self) -> None:
         self.entry.config(state="disabled")
+
+    def enable(self) -> None:
+        self.entry.config(state="normal")
 
     def get_entry_value(self) -> Widget:
         return self.entry.get()
@@ -36,7 +38,6 @@ class FileChooseGroup:
     def __init__(self, window: Tk, label_text: str):
         self.window = window
         self.label_text = label_text
-        self.file_destination = ""
 
         self.label = Label(window, text=label_text, font=font.Font(weight="bold", size=14))
         self.chosen_file_label = Label(window, text="No File Chosen Yet!", bg="#7F7F7F")
@@ -53,16 +54,17 @@ class FileChooseGroup:
         self.chosen_file_label.pack()
         self.choose_file_button.pack()
 
-    def destroy(self) -> None:
-        self.label.destroy()
-        self.chosen_file_label.destroy()
-        self.choose_file_button.destroy()
+    def empty(self) -> None:
+        self.chosen_file_label.config(text="No File Chosen Yet!")
 
     def disable(self) -> None:
         self.choose_file_button.config(state="disabled")
 
+    def enable(self) -> None:
+        self.choose_file_button.config(state="normal")
+
     def get_chosen_file_path(self) -> str:
-        self.chosen_file_label.cget("text")
+        return self.chosen_file_label.cget("text")
 
 
 class UpdateForm:
@@ -102,16 +104,16 @@ class UpdateForm:
         self.destination_id_label.pack()
         self.destination_source_data_label.pack()
 
-    def destroy(self) -> None:
-        self.source_file_choose_group.destroy()
-        self.source_sheet_label.destroy()
-        self.source_id_label.destroy()
-        self.source_data_label.destroy()
+    def empty(self) -> None:
+        self.source_file_choose_group.empty()
+        self.source_sheet_label.empty()
+        self.source_id_label.empty()
+        self.source_data_label.empty()
 
-        self.destination_file_choose_group.destroy()
-        self.destination_sheet_label.destroy()
-        self.destination_id_label.destroy()
-        self.destination_source_data_label.destroy()
+        self.destination_file_choose_group.empty()
+        self.destination_sheet_label.empty()
+        self.destination_id_label.empty()
+        self.destination_source_data_label.empty()
 
     def disable(self) -> None:
         self.source_file_choose_group.disable()
@@ -123,6 +125,18 @@ class UpdateForm:
         self.destination_sheet_label.disable()
         self.destination_id_label.disable()
         self.destination_source_data_label.disable()
+
+    def enable(self) -> None:
+        self.source_file_choose_group.enable()
+        self.source_sheet_label.enable()
+        self.source_id_label.enable()
+        self.source_data_label.enable()
+
+        self.destination_file_choose_group.enable()
+        self.destination_sheet_label.enable()
+        self.destination_id_label.enable()
+        self.destination_source_data_label.enable()
+
 
     def get_info(self) -> Tuple[Tuple[str, str, str, str], Tuple[str, str, str, str]]:
         return (
