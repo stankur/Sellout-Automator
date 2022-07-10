@@ -17,6 +17,7 @@ class ExcelFile:
     def save(self) -> None:
         self.workbook.save(self.excel_file_path)
 
+
 class SourceFile(ExcelFile):
     def __init__(
         self, excel_file_path: str, sheet_label: str, id_label: str, data_label: str

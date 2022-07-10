@@ -20,11 +20,15 @@ def get_sample_distributor_description_as_id_sheet(version: int = 0) -> Workshee
 
 def get_sample_distributor_code_as_id_sheet(version: int = 0) -> Worksheet:
     return _get_sheet_copy(
-        "/Users/stanleykurniawan/Downloads/saputra alsut mei 2022.xlsx", "Sheet1", version
+        "/Users/stanleykurniawan/Downloads/saputra alsut mei 2022.xlsx",
+        "Sheet1",
+        version,
     )
 
 
 def get_sample_master_sheet(version: int = 0) -> Worksheet:
     return _get_sheet_copy(
-        "/Users/stanleykurniawan/Downloads/MASTER NY JANUARI 2022.xlsx", "Upload", version
+        "/Users/stanleykurniawan/Downloads/MASTER NY JANUARI 2022.xlsx",
+        "Upload",
+        version,
     )
