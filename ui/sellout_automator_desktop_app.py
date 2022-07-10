@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import filedialog
 
 import sys
-sys.path.append('/Users/stanleykurniawan/sellout-automator')
+sys.path.append('..')
 import models.excel_file as excel_file
 
 window = Tk()
